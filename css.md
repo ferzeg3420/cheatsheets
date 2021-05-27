@@ -1,3 +1,9 @@
+# CSS - Cascading Style Sheets
+
+All of this cheatsheet comes from freecodecamp's amazing curriculum.
+Love those guys.  If you haven't already, [check them
+out](https://www.freecodecamp.org)
+
 ## inline css 
 
 ```
