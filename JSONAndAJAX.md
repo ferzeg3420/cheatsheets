@@ -1,0 +1,399 @@
+# JSON and AJAX (sorry for yelling btw)
+
+## Adding a click listener on load 
+
+```
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('getMessage').onclick = function(){};
+} );
+```
+
+## Make mock HTTP requests 
+
+```
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('getMessage').onclick = function() {
+    const json = JSON.parse(req.responseText);
+    document.getElementsByClassName('message')[0].innerHTML = JSON.stringify(json);
+  };
+});
+```
+
+## Make an HTTP request to a specific API 
+
+```
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('getMessage').onclick = function(){
+      const req = new XMLHttpRequest();
+      req.open("GET",'/json/cats.json',true);
+      req.send();
+      req.onload = function(){
+        const json = JSON.parse(req.responseText);
+        document.getElementsByClassName('message')[0].innerHTML = JSON.stringify(json);
+      };
+    };
+  });
+</script>
+
+<style>
+  body {
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+  }
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .box {
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 20px 5px;
+  }
+  button {
+    color: white;
+    background-color: #4791d0;
+    border-radius: 5px;
+    border: 1px solid #4791d0;
+    padding: 5px 10px 8px 10px;
+  }
+  button:hover {
+    background-color: #0F5897;
+    border: 1px solid #0F5897;
+  }
+</style>
+
+<h1>Cat Photo Finder</h1>
+<p class="message box">
+  The message will go here
+</p>
+<p>
+  <button id="getMessage">
+    Get Message
+  </button>
+</p>
+```
+
+## Another way to do HTTP request to a specific API: use fetch
+
+```
+<script>
+  document.addEventListener('DOMContentLoaded',function(){
+    document.getElementById('getMessage').onclick= () => {
+      // Add your code below this line
+fetch('/json/cats.json')
+	  .then(response => response.json())
+	  .then(data => {
+		  document.getElementById('message').innerHTML = JSON.stringify(data);
+    	})
+    };
+  });
+</script>
+<style>
+  body {
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+  }
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .box {
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 20px 5px;
+  }
+  button {
+    color: white;
+    background-color: #4791d0;
+    border-radius: 5px;
+    border: 1px solid #4791d0;
+    padding: 5px 10px 8px 10px;
+  }
+  button:hover {
+    background-color: #0F5897;
+    border: 1px solid #0F5897;
+  }
+</style>
+<h1>Cat Photo Finder</h1>
+<p id="message" class="box">
+  The message will go here
+</p>
+<p>
+  <button id="getMessage">
+    Get Message
+  </button>
+</p>
+```
+
+
+## Read a JSON object write it into an html element  
+
+```
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('getMessage').onclick = function(){
+      const req = new XMLHttpRequest();
+      req.open("GET",'/json/cats.json',true);
+      req.send();
+      req.onload = function(){
+        const json = JSON.parse(req.responseText);
+        let html = "";
+        // Add your code below this line
+        json.forEach(function(val) {
+          const keys = Object.keys(val);
+          html += "<div class = 'cat'>";
+          keys.forEach(function(key) {
+            html += "<strong>" + key + "</strong>: " + val[key] + "<br>";
+          });
+          html += "</div><br>";
+        });
+        // Add your code above this line
+        document.getElementsByClassName('message')[0].innerHTML = html;
+      };
+    };
+  });
+</script>
+
+<style>
+  body {
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+  }
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .box {
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 20px 5px;
+  }
+  button {
+    color: white;
+    background-color: #4791d0;
+    border-radius: 5px;
+    border: 1px solid #4791d0;
+    padding: 5px 10px 8px 10px;
+  }
+  button:hover {
+    background-color: #0F5897;
+    border: 1px solid #0F5897;
+  }
+</style>
+
+<h1>Cat Photo Finder</h1>
+<p class="message box">
+  The message will go here
+</p>
+<p>
+  <button id="getMessage">
+    Get Message
+  </button>
+</p>
+```
+
+## add image links using http reponse 
+
+```
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('getMessage').onclick = function(){
+      const req=new XMLHttpRequest();
+      req.open("GET",'/json/cats.json',true);
+      req.send();
+      req.onload = function(){
+        const json = JSON.parse(req.responseText);
+        let html = "";
+        json.forEach(function(val) {
+          html += "<div class = 'cat'>";
+          // Add your code below this line
+          html += "<img src='"
+               + val.imageLink
+               + "' alt='"
+               + val.altText
+               + "'>";
+
+          // Add your code above this line
+          html += "</div><br>";
+        });
+        document.getElementsByClassName('message')[0].innerHTML=html;
+      };
+     };
+  });
+</script>
+
+<style>
+  body {
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+  }
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .box {
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 20px 5px;
+  }
+  button {
+    color: white;
+    background-color: #4791d0;
+    border-radius: 5px;
+    border: 1px solid #4791d0;
+    padding: 5px 10px 8px 10px;
+  }
+  button:hover {
+    background-color: #0F5897;
+    border: 1px solid #0F5897;
+  }
+</style>
+<h1>Cat Photo Finder</h1>
+<p class="message box">
+  The message will go here
+</p>
+<p>
+  <button id="getMessage">
+    Get Message
+  </button>
+</p>
+```
+
+## Filter json objects out 
+
+```
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('getMessage').onclick = function(){
+      const req = new XMLHttpRequest();
+      req.open("GET",'/json/cats.json', true);
+      req.send();
+      req.onload=function(){
+        let json = JSON.parse(req.responseText);
+        let html = "";
+        // Add your code below this line
+        json = json.filter(
+          function(val) {
+            return (val.id !== 1);
+          }
+        );
+
+        // Add your code above this line
+         json.forEach(function(val) {
+           html += "<div class = 'cat'>"
+
+           html += "<img src = '" + val.imageLink + "' " + "alt='" + val.altText + "'>"
+
+           html += "</div>"
+         });
+         document.getElementsByClassName('message')[0].innerHTML = html;
+       };
+     };
+  });
+</script>
+
+<style>
+  body {
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+  }
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .box {
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 20px 5px;
+  }
+  button {
+    color: white;
+    background-color: #4791d0;
+    border-radius: 5px;
+    border: 1px solid #4791d0;
+    padding: 5px 10px 8px 10px;
+  }
+  button:hover {
+    background-color: #0F5897;
+    border: 1px solid #0F5897;
+  }
+</style>
+
+<h1>Cat Photo Finder</h1>
+<p class="message box">
+  The message will go here
+</p>
+<p>
+  <button id="getMessage">
+    Get Message
+  </button>
+</p>
+```
+
+## Make a post request with AJAX 
+
+```
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('sendMessage').onclick = function(){
+
+      const userName = document.getElementById('name').value;
+      const url = 'https://jsonplaceholder.typicode.com/posts';
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 201) {
+          const serverResponse = JSON.parse(xhr.response);
+          document.getElementsByClassName('message')[0].textContent =
+            serverResponse.userName 
+            + serverResponse.suffix;
+        }
+      };
+      const body = JSON.stringify({ userName: userName, suffix: ' loves cats!' });
+      xhr.send(body);
+    };
+  });
+</script>
+
+<style>
+  body {
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+  }
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .box {
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 20px 5px;
+  }
+  button {
+    color: white;
+    background-color: #4791d0;
+    border-radius: 5px;
+    border: 1px solid #4791d0;
+    padding: 5px 10px 8px 10px;
+  }
+  button:hover {
+    background-color: #0F5897;
+    border: 1px solid #0F5897;
+  }
+</style>
+
+<h1>Cat Friends</h1>
+<p class="message box">
+  Reply from Server will be here
+</p>
+<p>
+  <label for="name">Your name:
+    <input type="text" id="name"/>
+  </label>
+  <button id="sendMessage">
+    Send Message
+  </button>
+</p>
+```
