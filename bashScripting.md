@@ -1,7 +1,10 @@
+# Bash Scripting
+
 #  CREATING A SCRIPT
 
 To make a script executable type the following into the command prompt
 Remember: that you have to be in the same directory as your script.
+
 ```
 chmod +x hello_world.sh
 ```
