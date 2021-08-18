@@ -1,3 +1,7 @@
+---
+title: Bootstrap
+---
+
 # Bootstrap Basics
 
 ## Add Bootstrap

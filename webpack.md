@@ -1,3 +1,7 @@
+---
+title: webpack
+---
+
 # Credit to VALENTINO GAGLIARDI for this amazing tutorial:
 [valentino's tutorial](https://www.valentinog.com/blog/webpack/) off of which this tutorial is based.
 

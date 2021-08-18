@@ -1,6 +1,11 @@
+---
+title: CSS
+---
+
 # CSS - Cascading Style Sheets
 
-All of this cheatsheet comes from freecodecamp's amazing curriculum.
+This is for personal use. But ALL the good parts of 
+this cheatsheet comes from freecodecamp's web curriculum.
 Love those guys.  If you haven't already, [check them
 out](https://www.freecodecamp.org)
 
@@ -535,7 +540,7 @@ centered {
 ## Linear Gradient
 
 Create a Gradual CSS Linear Gradient. This is the syntax: background:
-linear-gradient(gradient_direction, color 1, color 2, ...);
+linear-gradient(gradient\_direction, color 1, color 2, ...);
 
 ```
 div {
@@ -972,7 +977,6 @@ The flex-shrink property. When it's used, it allows an item to shrink
 if the flex container is too small. Items shrink when the width of the 
 parent container is smaller than the combined widths of all the flex 
 items within it.
-*/
 
 ```
 #box-1 {
@@ -1003,7 +1007,6 @@ items within it.
 ## Flex Basis
 
 The flex-basis property specifies the initial size of the item before CSS makes adjustments with flex-shrink or flex-grow.
-*/
 
 ```
 #box-1 {
@@ -1092,9 +1095,7 @@ of setting them all at once.
 }
 ```
 
-/*
 Add two rows with grid template rows.
-*/
 
 ```
 .container {
@@ -1103,11 +1104,11 @@ Add two rows with grid template rows.
 }
 ```
 
-fr: sets the column or row to a fraction of the available space,
+- fr: sets the column or row to a fraction of the available space,
 
-auto: sets the column or row to the width or height of its content automatically,
+- auto: sets the column or row to the width or height of its content automatically,
 
-%: adjusts the column or row to the percent width of its container.
+- %: adjusts the column or row to the percent width of its container.
 
 ```
 .container {
@@ -1265,9 +1266,11 @@ After creating an area's template for your grid container, as
 shown in the previous example, you can place an item in your 
 custom area by referencing the name you gave it.
 
+```
 .item1 {
   grid-area: header;
 }
+```
 
 ## Grid area 2
 
@@ -1285,10 +1288,12 @@ grid-area: horizontal line to start at / vertical line to start at
 
 ## Reduce repetition with the repeat function
 
+```
 .container {
    display: grid;
    grid-template-rows: repeat(100, 50px);
 }
+```
 
 ## Minmax for grids
 
@@ -1349,5 +1354,54 @@ of the container.
 ```
 .some-class {
   overflow-y: auto;
+}
+```
+
+## Links 
+
+Change the color and get rid of the underline completely
+
+```
+color: salmon;
+text-decoration: none;
+```
+
+Add the underline
+
+```
+text-decoration: underline;
+```
+
+Link states:
+
+###  unvisited link 
+
+```
+a:link {
+  color: red;
+}
+```
+
+### visited link 
+
+```
+a:visited {
+  color: green;
+}
+```
+
+### mouse over link 
+
+```
+a:hover {
+  color: hotpink;
+}
+```
+
+### selected link 
+
+```
+a:active {
+  color: blue;
 }
 ```

@@ -1,3 +1,7 @@
+---
+title: Mongo CLI
+---
+
 # Mongo CLI
 
 ## Installation

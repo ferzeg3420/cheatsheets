@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# CONVERTER="pandoc -s -S --toc -t html -H cheatsheet.css"
+CONVERTER="pandoc -s --self-contained --toc --css ./cheatsheet.css"
+
+IS_VERBOSE=""
+
+print_usage() {
+    echo "$0 [-vh]"
+}
+
+while getopts 'vh' flag
+do
+    case "$flag"
+    in
+        v) IS_VERBOSE="TRUE" ;;
+        h) print_usage; exit 0;;
+        *) print_usage; exit 1 ;;
+    esac
+done
+
+for i in *.md
+do
+    if test "${i}" = "README.md"
+    then
+        continue
+    fi
+
+    if test "${IS_VERBOSE}" = "TRUE"
+    then
+        echo "markdown file: ${i}"
+    fi
+
+    TARGET_HTML="$(echo "${i}" | sed -e "s/\.md$/\.html/")"
+    ${CONVERTER} "${i}" -o "${TARGET_HTML}"
+
+    if test -e "/Users/fernandozegada/Code/cheatSheets/${TARGET_HTML}"
+    then
+        rm "/Users/fernandozegada/Code/cheatSheets/${TARGET_HTML}"
+    fi
+
+    mv "/Users/fernandozegada/Code/markdownCheatsheets/${TARGET_HTML}"\
+       "/Users/fernandozegada/Code/cheatSheets/${TARGET_HTML}"
+done

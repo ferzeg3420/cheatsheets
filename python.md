@@ -1,3 +1,7 @@
+---
+title: Python
+---
+
 # Basics
 
 ## Ints in python

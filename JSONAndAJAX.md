@@ -1,3 +1,7 @@
+---
+title: JSON and AJAX
+---
+
 # JSON and AJAX (sorry for yelling btw)
 
 ## Adding a click listener on load 

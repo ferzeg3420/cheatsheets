@@ -1,6 +1,10 @@
+---
+title: BASH
+---
+
 # Bash Scripting
 
-#  CREATING A SCRIPT
+###  CREATING A SCRIPT
 
 To make a script executable type the following into the command prompt
 Remember: that you have to be in the same directory as your script.
@@ -23,32 +27,32 @@ path/hello_world.sh
 
 - To get bash to interpret a script write the following as the first non-empty line in a script.
 ```
-#!/bin/bash 
+##!/bin/bash 
 ```
 The pound sign, #, indicates comments in bash, but in the case of the first 
 line in a file, this is a directive to run the bash interpreter.
 
-# INCLUDING A SCRIPT
+## INCLUDING A SCRIPT
 
 ```
-#!/bin/bash
+##!/bin/bash
 source script.sh 
 ```
 This includes script.sh if it's in the same directory as the
 current script.
 
-# VARIABLES
+## VARIABLES
 
 Bash variables are dynamic and weakly typed, meaning the types are 
 determined at runtime and that the variables are allowed to vary.
 That is, an int can become a string.
 
-## create a variable.
+### create a variable.
 ```
 NUM=1
 ```
 
-## the dollar before the identifier dereferences the variable.
+### the dollar before the identifier dereferences the variable.
 ```
 let "NUM=$NUM+1"
 [ $NUM -eq 1 ] 
@@ -57,12 +61,12 @@ STRING="HELLO WORLD!!!"
 echo $STRING
 ```
 
-## to make a variable local to a function:
+### to make a variable local to a function:
 ```
 local VAR="something"
 ```
 
-# LIST OF PRESET VARIABLES
+## LIST OF PRESET VARIABLES
 
 ```
 $SHELL
@@ -80,7 +84,7 @@ $$
 pid of the current process.
 
 ```
-#$-
+##$-
 ```
 shell options currently set. Currently doesn't work in BASH? 
 
@@ -94,10 +98,11 @@ $!
 ```
 pid of the background command.
 
-# PASSING ARGUMENTS TO A SCRIPT
+## PASSING ARGUMENTS TO A SCRIPT
 
 You can use predefined variables to access passed arguments.\
 For example inside a script file you can do this:
+
 ```
 echo echoing the arguments to the shell:
 echo $1 $2 $3
@@ -106,42 +111,54 @@ echo echoing the name of this script.
 echo $0
 ```
 
-## You can also store arguments from bash command line in special array
+### You can also store arguments from bash command line in special array
 ```
 args=("$@")
 ```
 
-## echo arguments to the shell
+### echo arguments to the shell
 ```
 echo ${args[0]} ${args[1]} ${args[2]}
 ```
 
-## use $@ to print out all arguments at once
+### use $@ to print out all arguments at once
+
 ```
 echo $@ 
 ```
 
-## You can also use $* to print out all arguments at once
+### You can also use $\* to print out all arguments at once
+
 ```
 echo $* 
 ```
 
-`echo "$*"` evaluates to "$1 $2 $3..."
-`echo "$@"` evaluates to "$1" "$2" "$3" ...
+```
+echo "$*"
+```
+evaluates to "$1 $2 $3..."
 
-## print the number of arguments passed to a script
+```
+echo "$@"
+```
+evaluates to "$1" "$2" "$3" ...
+
+### print the number of arguments passed to a script
 echo Number of arguments passed: $#
 
-#  EXECUTING COMMANDS IN A SCRIPT
+##  EXECUTING COMMANDS IN A SCRIPT
 
 You can use backticks \` \` to use the output of a command as an argument for another command
 ```
 echo `uname -o`
 ```
 
-`echo $(uname -o)` is another option to do the same.
+```
+echo $(uname -o)
+``` 
+is another option to do the same.
 
-#  READING USER INPUT
+##  READING USER INPUT
 
 ```
 echo "Hi, please type a word:"
@@ -153,32 +170,43 @@ echo "Here is your input: \"$word1\" \"$word2\""
 echo -e "How do you feel about bash scripting? "
 ```
 
-## The read command stores the user's reply iny the default build-in variable $REPLY
+### The read command stores the user's reply iny the default build-in variable $REPLY
+
+```
 read
 echo "You said $REPLY"
+```
 
-## The -a flag makes the read command, read inputs into an array
+### The -a flag makes the read command, read inputs into an array
 read -a colours
+```
 echo "My favorite colours are also ${colours[0]}, ${colours[1]} and\
     ${colours[2]}"
+```
 
-# TRAPS
+## TRAPS
 
+```
 trap aFunction INT
+```
 
-## The aFunction is executed when CTRL-C is pressed:
+### The aFunction is executed when CTRL-C is pressed:
+```
 aFunction()
 {
     echo "CTRL+C Detected"
 }
+```
 
-## for loop from 1 to 10
+### for loop from 1 to 10
+```
 for a in `seq 1 10`; do
     echo "$a/10 to Exit." 
     sleep 1;
 done
+```
 
-## Signal numbers and signals
+### Signal numbers and signals
 
 ```
  1)HUP      12)SYS      23)POLL
@@ -203,24 +231,24 @@ trap "" 1 2
 ```
 The empty "" makes the SIGHUP and SIGINT be ignored.
 
-# ARRAYS
+## ARRAYS
 
-## Declare array with 4 elements
+### Declare array with 4 elements
 ```
 ARRAY=( 'Debian Linux' 'Redhat Linux' Ubuntu Linux )
 ```
 
-## get the number of elements in the array
+### get the number of elements in the array
 ```
 ELEMENTS=${## ARRAY[@]}
 ```
 
-## store the result of a command in an array.
+### store the result of a command in an array.
 ```
 ARRAY=($(du -h *.cpp))
 ```
 
-## for loop through array
+### for loop through array
 ```
 for (( i=0;i<$ELEMENTS;i++))
 do
@@ -228,19 +256,19 @@ do
 done
 ```
 
-# READ A FILE INTO BASH ARRAY
+## READ A FILE INTO BASH ARRAY
 
-## Declare an array
+### Declare an array
 ```
 declare -a ARRAY
 ```
 
-## Link the file descriptor 10 with stdin
+### Link the file descriptor 10 with stdin
 ```
 exec 10<&0
 ```
 
-## stdin replaced with a file supplied as a first argument
+### stdin replaced with a file supplied as a first argument
 ```
 exec < $1
 let count=0
@@ -255,17 +283,17 @@ echo Number of elements: ${## ARRAY[@]}
 ```
 
 
-## echo array's content
+### echo array's content
 ```
 echo ${ARRAY[@]}
 ```
 
-## restore stdin from filedescriptor 10 and close filedescriptor 10
+### restore stdin from filedescriptor 10 and close filedescriptor 10
 ```
 exec 0<&10 10<&-
 ```
 
-## READ & PROCESS A FILE LINE BY LINE
+### READ & PROCESS A FILE LINE BY LINE
 
 ```
 while read -r line
@@ -274,10 +302,10 @@ do
 done < /path/to/file.txt
 ```
 
-# BASH IF / ELIF / ELSE / FI STATEMENTS
+## BASH IF / ELIF / ELSE / FI STATEMENTS
 
 
-## bash check if directory exists
+### bash check if directory exists
 
 ```
 directory="./someDir"
@@ -306,7 +334,7 @@ else
 fi
 ```
 
-# BASH FILE TESTS
+## BASH FILE TESTS
 
 ```
 boolExpr -a boolExpr # -a is the and operator.
@@ -331,7 +359,7 @@ boolExpr -o boolExpr # -a is the or operator.
 -x filename	True if file is executable
 ```
 
-## File test example:
+### File test example:
 ```
 file="./file"
 if [ -e $file ]
@@ -342,7 +370,7 @@ else
 fi
 ```
 
-## ARITHMETIC TESTS
+### ARITHMETIC TESTS
 
 ```
 -lt	less than
@@ -354,7 +382,7 @@ fi
 ```
 
 
-## declaring integers
+### declaring integers
 ```
 NUM1=2
 NUM2=2
@@ -366,7 +394,7 @@ else
 fi
 ```
 
-## STRING TESTS
+### STRING TESTS
 
 ```
 =	equal
@@ -390,9 +418,9 @@ do
 done
 ```
 
-# LOOPS: WHILE, UNTIL AND FOR
+## LOOPS: WHILE, UNTIL AND FOR
 
-## bash for loop
+### bash for loop
 ```
 for nickame in Fer Fernan Ferdy Nando NANDo NAND
 do
@@ -407,7 +435,7 @@ do
 done
 ```
 
-## you can do metacharacter expansion
+### you can do metacharacter expansion
 ```
 for file_in_pwd in *
 do
@@ -432,7 +460,7 @@ do
 done 
 ```
 
-## bash for loop through files ending in .pdf in the working directory.
+### bash for loop through files ending in .pdf in the working directory.
 
 ```
 for pdf_file in *.pdf 
@@ -441,7 +469,7 @@ do
 done
 ```
 
-## bash for loop with ranges
+### bash for loop with ranges
 
 ```
 for value in {1..5}
@@ -450,7 +478,7 @@ do
 done 
 ```
 
-## bash for loop with ranges and steps
+### bash for loop with ranges and steps
 
 ```
 for value in {10..0..2}
@@ -459,7 +487,7 @@ do
 done 
 ```
 
-## bash while loop
+### bash while loop
 
 ```
 COUNT=6
@@ -477,7 +505,7 @@ do
 done
 ```
 
-## bash until loop
+### bash until loop
 
 ```
 COUNT=0
@@ -488,10 +516,10 @@ do
 done
 ```
 
-#  BASH FUNCTIONS
+##  BASH FUNCTIONS
 
-## BASH FUNCTIONS should be declared at the top. (since scripts are
-## interpreted line by line.)
+### BASH FUNCTIONS should be declared at the top. (since scripts are
+### interpreted line by line.)
 
 ```
 foo() {
@@ -532,21 +560,25 @@ function parens_optional() {
 }
 ```
 
-## FUNCTION CALLS
+### FUNCTION CALLS
 
-### calling a function
+#### calling a function
 foo
 
-### Passing an argument to a function
+#### Passing an argument to a function
 bar "argument"
 
-### getting the return value from a function
+#### getting the return value from a function
+
+```
 VALUE=$(return_value)
+```
 
-### You can store your functions on a separate file and then use the
-. command with the name of the file to be able to use them.
+#### You can store your functions on a separate file
 
-# BASH SELECT
+Then use the `source` command to have them available on another file.
+
+## BASH SELECT
 
 ```
 OPERATING_SYS='Ubuntu Mint freeBSD UNIX Quit'
@@ -563,7 +595,8 @@ done
 
 exit 0 
 ```
-# CASE
+
+## CASE
 
 ```
 echo "What is your preferred programming / scripting language"
@@ -597,16 +630,16 @@ red|orange)
 *) echo No such color
 ```
 
-# USING QUOTES
+## USING QUOTES
 
-## Single quotes
+### Single quotes
 
 Single quotes in bash will suppress the special meaning of every meta
 character. Therefore meta characters will be read literally. It is
 not possible to use another single quote within two single quotes not
 even if the single quote is escaped by a backslash.
 
-## Double Quotes
+### Double Quotes
 
 Double quotes in bash will suppress the special meaning of every meta
 character except "$", "\" and "`". Any other meta characters will be
@@ -614,52 +647,52 @@ read literally. It is also possible to use a single quote within double
 quotes. If we need to use double quotes within double quotes bash can
 read them literally if we scape them with the back slash "\".
 
-## Back quotes
+### Back quotes
 
 Everything inside back quotes is interpreted as a command: `date +%Y`
 
-# ARITHMETIC
+## ARITHMETIC
 
-## bash addition
+### bash addition
 ```
 let ADDITION=3+5
 echo "3 + 5 =" $ADDITION
 ```
 
-## bash subtraction
+### bash subtraction
 
 ```
 let SUBTRACTION=7-8
 echo "7 - 8 =" $SUBTRACTION 
 ```
 
-## bash multiplication
+### bash multiplication
 
 ```
 let MULTIPLICATION=5*8
 echo "5 * 8 =" $MULTIPLICATION
 ```
 
-## bash division
+### bash division
 ```
 let DIVISION=4/2
 echo "4 / 2 =" $DIVISION
 ```
 
-## bash modulus
+### bash modulus
 ```
 let MODULUS=9%4
 echo "9 % 4 =" $MODULUS
 ```
 
-## bash power of two
+### bash power of two
 ```
 let POWEROFTWO=2**2
 echo "2 ^ 2 =" $POWEROFTWO
 ```
 
 
-## There are two formats for arithmetic expansion:
+### There are two formats for arithmetic expansion:
 - `$[ expression ]` 
 -  `$(( expression #))`
 
@@ -672,7 +705,7 @@ echo 8 % 7 = $((8 % 7))
 echo 2 ^ 8 = $[ 2 ** 8 ]
 ```
 
-# Declare variables and read user input
+## Declare variables and read user input
 
 ```
 echo -e "Please enter two numbers \c"
@@ -682,32 +715,32 @@ result=$num1+$num2
 echo "Result is:$result "
 ```
 
-# Conversions in bash
+## Conversions in bash
 
-## bash convert binary number 10001 to decimal 17?
+### bash convert binary number 10001 to decimal 17?
 ```
 result=2#10001
 echo $result
 ```
 
-## bash convert octal number 16 to decimal 22?
+### bash convert octal number 16 to decimal 22?
 ```
 result=8#16
 echo $result
 ```
 
-## bash convert hex number 0xE6A to decimal ...?
+### bash convert hex number 0xE6A to decimal ...?
 ```
 result=16## E6A
 echo $result 
 ```
 
-## arithmetic with floating point numbers:
+### arithmetic with floating point numbers:
 ```
 floatingPoint=$(echo "scale=2;3.4+43.1" | bc)
 ```
 
-# FLAGS
+## FLAGS
 
 ```
 a_flag=''
@@ -746,7 +779,7 @@ What is happening to the f, which has an arugment is the following:
  OPTARG shall be unset." (getopts manpage)
 ```
 
-# SHELL METACHARACTERS AND FILENAME SUBSTITUTION
+## SHELL METACHARACTERS AND FILENAME SUBSTITUTION
 
 Assume the following exist in your directory:
 ```
@@ -790,8 +823,9 @@ ls file*
 >file file1 file2 file.bak file2.bak
 ```
 
-## escaping metacharacters
+### escaping metacharacters
 Assume this file are in your current directory:
+
 ```
 ls
 >abc file1 file2 youx
@@ -813,22 +847,22 @@ expr 23 \* 2
 ```
 
 
-## return the process number of a script.
+### return the process number of a script.
 ```
 echo $$  >1313
 ```
 
-## return the exit value of the last command. 
+### return the exit value of the last command. 
 ```
 echo $? >0
 ```
 
-## The local keyword makes a variable local to a function 
+### The local keyword makes a variable local to a function 
 ```
 local immutable='constant?' 
 ```
 
-## Make a variable immutable. You can't change its value.
+### Make a variable immutable. You can't change its value.
 ```
 readonly immutable 
 immutable='variable?'
@@ -836,7 +870,7 @@ immutable='variable?'
 ```
 
 
-## eval is used to do the variable substitution twice for a command.
+### eval is used to do the variable substitution twice for a command.
 ```
 echo "\$\?"
 > $?
@@ -844,53 +878,53 @@ eval echo "\$\?"
 > 0
 ```
 
-### eval only affects the one command that it is attached to:
+#### eval only affects the one command that it is attached to:
 ```
 eval echo "\$\?"; echo "\$\$"
 >0
 >$$
 ```
 
-# VARIABLE EXPANSION MODIFIERS
+## VARIABLE EXPANSION MODIFIERS
 
-## If 'variable' is set, substitute its value. Otherwise use word.
+### If 'variable' is set, substitute its value. Otherwise use word.
 ```
 ${variable:-word}
 ```
 
-## Same as :- but word is substituted permanently, it becomes the new value of variable.     
+### Same as :- but word is substituted permanently, it becomes the new value of variable.     
 ```
 ${variable:=word}
 ```
 
-## if variable is set and nonnull use 'word' instead. Otherwise do nothing.
+### if variable is set and nonnull use 'word' instead. Otherwise do nothing.
 ```
 ${variable:+word}
 ```
 
-## If 'variable' is set and nonnull substitute it. Otherwise use word and exit
+### If 'variable' is set and nonnull substitute it. Otherwise use word and exit
 ```
 ${variable:?word}
 ```
 
-# OVERVIEW OF A FEW PARAMETER EXPANSION MODES
+## OVERVIEW OF A FEW PARAMETER EXPANSION MODES
 
-## delete shortest match of pattern from the beginning
+### delete shortest match of pattern from the beginning
 ```
 ${MYVAR## pattern}     
 ```
 
-## delete longest match of pattern from the beginning
+### delete longest match of pattern from the beginning
 ```
 ${MYVAR### pattern}
 ```
 
-## delete shortest match of pattern from the end
+### delete shortest match of pattern from the end
 ```
 ${MYVAR%pattern} 
 ```
 
-## delete longest match of pattern from the end
+### delete longest match of pattern from the end
 ```
 ${MYVAR%%pattern} 
 ```
@@ -901,17 +935,17 @@ means longest.
 
 - You can get substrings based on position using numbers:
 
-## Remove the first three chars (leaving 4..end)
+### Remove the first three chars (leaving 4..end)
 ```
 ${MYVAR:3}
 ```
 
-## Return the first three characters
+### Return the first three characters
 ```
 ${MYVAR::3}
 ```
 
-## The next five characters after removing the first 3 (chars 4-9)
+### The next five characters after removing the first 3 (chars 4-9)
 ```
 ${MYVAR:3:5} 
 ```
@@ -921,26 +955,26 @@ You can also replace particular strings or patterns using:
 ```
 ${MYVAR/search/replace}
 ```
-# Parameter expansion examples:
+## Parameter expansion examples:
 
-## Given a variable like:
+### Given a variable like:
 ```
 MYVAR="users/joebloggs/domain.com" 
 ```
 
-## Remove the path leaving file name (all characters up to a slash):
+### Remove the path leaving file name (all characters up to a slash):
 ```
 echo ${MYVAR##*/}
 domain.com
 ```
 
-## Remove the file name, leaving the path
+### Remove the file name, leaving the path
 ```
 echo ${MYVAR%/*} 
 users/joebloggs
 ```
 
-## Get just the file extension (remove all before last period):
+### Get just the file extension (remove all before last period):
 ```
 $echo ${MYVAR##*.}
 .com
@@ -954,7 +988,7 @@ extension:
 echo ${NAME%.*} # from the new var remove the part after the last
 period domain
 
-# SOURCES
+## SOURCES
 
 - SOURCE OF MOST OF THIS CHEATSHEET:
 - https://linuxconfig.org/bash-scripting-tutorial

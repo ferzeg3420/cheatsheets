@@ -1,3 +1,7 @@
+---
+title: jQuery
+---
+
 All the credit goes to freecodecamp
 All the mistakes are on me
 

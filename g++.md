@@ -1,3 +1,7 @@
+---
+title: C++ compiler
+---
+
 # The c++ compiler (on Unix at least). 
 
 I hear there's another one called llvm or something

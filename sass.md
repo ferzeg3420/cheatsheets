@@ -1,3 +1,7 @@
+---
+title: Sass
+---
+
 Sass, or "Syntactically Awesome StyleSheets", is a language extension of CSS. It adds features that aren't available using basic CSS syntax. Sass makes it easier for developers to simplify and maintain the style sheets for their projects.
 
 Sass can extend the CSS language because it is a preprocessor. It takes code written using Sass syntax, and converts it into basic CSS. This allows you to create variables, nest CSS rules into others, and import other Sass files, among other things. The result is more compact, easier to read code.
@@ -8,16 +12,16 @@ The second and older syntax, known as the indented syntax (or sometimes just "Sa
 
 Vendor prefixes are features implemented by specific browsers
 
-# Variables 
+## Variables 
 
-## To declare variables:
+### To declare variables:
 
 ```
 $main-fonts: Arial, sans-serif;
 $headings-color: green;
 ```
 
-## To use variables:
+### To use variables:
 ```
 h1 {
   font-family: $main-fonts;
@@ -25,9 +29,9 @@ h1 {
 }
 ```
 
-# Nest css with Sass 
+## Nest css with Sass 
 
-## Instead of:
+### Instead of:
 ```
 nav {
   background-color: red;
@@ -39,7 +43,7 @@ nav ul li {
   display: inline-block;
 }
 ```
-## One can do:
+### One can do:
 ```
 nav {
   background-color: red;
@@ -52,7 +56,7 @@ nav {
 }
 ```
 
-# Mixins are is like pasting with arguments 
+## Mixins are is like pasting with arguments 
 
 ```
 @mixin box-shadow($x, $y, $blur, $c){ 
@@ -62,14 +66,14 @@ nav {
   box-shadow: $x $y $blur $c;
 }
 ```
-## Using the mixin:
+### Using the mixin:
 ```
 div {
   @include box-shadow(0px, 0px, 4px, #fff);
 }
 ```
 
-# Logic for your mixins: if, else if, else; conditionals 
+## Logic for your mixins: if, else if, else; conditionals 
 ```
 @mixin text-effect($val) {
   @if $val == danger {
@@ -87,23 +91,23 @@ div {
 }
 ```
 
-# For Loops 
+## For Loops 
 
-## 1,2,...,12 last is inclusive.
+### 1,2,...,12 last is inclusive.
 ```
 @for $i from 1 through 12 {
   .col-#{$i} { width: 100%/12 * $i; }
   /* #{$i} is syntax to convert an int to a string */
 }
 ```
-## 1,2,...,11 last is not inclusive.
+### 1,2,...,11 last is not inclusive.
 ```
 @for $i from 1 through 12 {
   .col-#{$i} { width: 100%/12 * $i; }
 }
 ```
 
-# For each loop 
+## For each loop 
 
 ```
 @each $color in blue, red, green {
@@ -111,16 +115,16 @@ div {
 }
 ```
 
-## Using a map
+### Using a map
 ```
 $colors: (color1: blue, color2: red, color3: green);
 @each $key, $color in $colors {
   .#{$color}-text {color: $color;}
 }
 ```
-## $key gets rid of the keys
+### $key gets rid of the keys
 
-# While loop 
+## While loop 
 
 ```
 $x: 1;
@@ -130,19 +134,19 @@ $x: 1;
 }
 ```
 
-# Partials in Sass are separate files that hold segments of CSS code. 
+## Partials in Sass are separate files that hold segments of CSS code. 
 
-Names for partials start with the underscore (_) character, which
+Names for partials start with the underscore (\_) character, which
 tells Sass it is a small segment of CSS and not to convert it into
-a CSS file.  so we may create a file called _mixins.scss and add
+a CSS file.  so we may create a file called \_mixins.scss and add
 some mixins in there
 
-## Then to import to our main.scss file (no need for the extension or underscore):
+### Then to import to our main.scss file (no need for the extension or underscore):
 ```
 @import 'mixins'
 ```
 
-# Inherit all the properties from another class 
+## Inherit all the properties from another class 
 
 ```
 .panel{

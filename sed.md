@@ -1,3 +1,7 @@
+---
+title: Sed
+---
+
 # sed regex table
 
 | Symbol | Matches |
